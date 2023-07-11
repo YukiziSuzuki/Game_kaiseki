@@ -1,10 +1,12 @@
 import copy
 
+# ノードクラスを定義します。各ノードはゲームの特定の状態を表し、その子ノードを持ちます
 class Node:
     def __init__(self, state):
         self.state = state
         self.children = []
         
+ # ゲーム木を生成します。初期状態から始めて、可能なすべてのゲームの状態を探索します。       
 def generate_game_tree():
     # 初期盤面の生成
     initial_state = ["〇","〇","〇","_","_","_","■","■","■","flag","〇"]
@@ -16,7 +18,8 @@ def generate_game_tree():
     build_game_tree(root, '〇')
     
     return root
-
+    
+# ゲーム木を構築します。現在のノードと次のプレイヤーを引数として取り、可能なすべての次の状態に対して子ノードを作成します。
 def build_game_tree(node, player):
     
     print(node.state)
@@ -74,7 +77,8 @@ def build_game_tree(node, player):
 
     # 次のプレイヤーに交代して再帰的にゲーム木を構築
     #build_game_tree(child, '〇' if player == '■' else '■')
-                
+
+# ゲームが終了しているかどうかを判断します。勝利条件を満たしている場合は1または-1を返し、それ以外の場合は0を返します。                
 def is_game_over(state):
     # 勝利条件のチェック
     if state[8]=="〇" and state[7]=="〇" and state[6]=="〇":
