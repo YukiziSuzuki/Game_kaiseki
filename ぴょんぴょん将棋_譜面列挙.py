@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 15 16:20:34 2023
-
-@author: suzuki
-"""
 import copy
-
 
 class Node:
     def __init__(self, state):
