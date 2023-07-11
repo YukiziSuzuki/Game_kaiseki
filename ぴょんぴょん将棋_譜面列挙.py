@@ -54,6 +54,7 @@ def build_game_tree(node, player):
                     # 新しいノードを作成し、現在のノードの子とする
                     child = Node(new_state)
                     node.children.append(child)
+                    # 次のプレイヤーに交代して再帰的にゲーム木を構築
                     build_game_tree(child, '〇' if player == '■' else '■')
                     break
                     
@@ -72,11 +73,9 @@ def build_game_tree(node, player):
                     # 新しいノードを作成し、現在のノードの子とする
                     child = Node(new_state)
                     node.children.append(child)
+                    # 次のプレイヤーに交代して再帰的にゲーム木を構築
                     build_game_tree(child, '〇' if player == '■' else '■')
                     break
-
-    # 次のプレイヤーに交代して再帰的にゲーム木を構築
-    #build_game_tree(child, '〇' if player == '■' else '■')
 
 # ゲームが終了しているかどうかを判断します。勝利条件を満たしている場合は1または-1を返し、それ以外の場合は0を返します。                
 def is_game_over(state):
@@ -88,8 +87,7 @@ def is_game_over(state):
     
     return "0"
 
-
-
+# ゲーム木を表示します。各ノードの状態を表示し、その子ノードに再帰的に適用します。
 def print_game_tree(node, depth=0):
     # 盤面を表示
     #print('  ' * depth + str(node.state))
@@ -102,7 +100,7 @@ def print_game_tree(node, depth=0):
         print_game_tree(child, depth + 1)
         
         
-        
+# 後退解析を行います。各ノードが勝ちか負けかを決定します。        
 def retraction_analysis(node):
     
     for child in node.children:
@@ -110,7 +108,6 @@ def retraction_analysis(node):
         
     if node.state[9]!="flag":
         return
-    
     
     if node.state[10]=="〇":
         node.state[9]="L"
@@ -124,9 +121,6 @@ def retraction_analysis(node):
             if child.state[9]=="L":
                 node.state[9]="L"
     
-        
-        
-        
 # ゲーム木の生成と表示
 game_tree = generate_game_tree()
 
